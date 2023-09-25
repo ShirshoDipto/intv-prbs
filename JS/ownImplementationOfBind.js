@@ -18,6 +18,7 @@ const obj2 = {
   },
 };
 
+/** Here is the answer */
 function bind(context, func) {
   return function (...args) {
     func.apply(context, args);
