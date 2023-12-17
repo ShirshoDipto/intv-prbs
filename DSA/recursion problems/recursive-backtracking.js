@@ -38,7 +38,29 @@ function permutation(str) {
   return allPermutaations;
 }
 
-console.log(permutation("cat"));
-console.log(permutation("c"));
-console.log(permutation("tail"));
-console.log(permutation("HHT"));
+// console.log(permutation("cat"));
+// console.log(permutation("c"));
+// console.log(permutation("tail"));
+// console.log(permutation("HHT"));
+
+// ------------------ #3 Permutations from n coin tosses -------------------
+function coinTossHelper(total, n, soFar, allPerms, tabs = "    ") {
+  // console.log(`${tabs}coinTossHelper(${total}, ${n}, ${soFar})`);
+  if (total === n) {
+    allPerms.add(soFar);
+  } else {
+    coinTossHelper(total + 1, n, soFar + "H", allPerms, tabs + "    ");
+    coinTossHelper(total + 1, n, soFar + "T", allPerms, tabs + "    ");
+  }
+}
+
+function coinToss(n) {
+  const allPermutations = new Set();
+  coinTossHelper(0, n, "", allPermutations);
+  return allPermutations;
+}
+
+// console.log(coinToss(4));
+console.log(coinToss(3));
+console.log(coinToss(2));
+console.log(coinToss(1));
