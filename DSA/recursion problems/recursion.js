@@ -15,6 +15,22 @@ function factorial(a) {
   return a * factorial(a - 1);
 }
 
-console.log(factorial(0));
-console.log(factorial(2));
-console.log(factorial(5));
+// console.log(factorial(0));
+// console.log(factorial(2));
+// console.log(factorial(5));
+
+/** ------------------- #2 Reverse String (Options 1) --------------------------- */
+function reverseString(str, tabs = "  ") {
+  // console.log(`${tabs}reverseString(${str})`);
+  if (str.length === 0) return str;
+  const lastStr = str[str.length - 1];
+  const newStr = str.slice(0, str.length - 1);
+  return lastStr + reverseString(newStr, tabs + "  ");
+}
+
+console.log(reverseString("stressed"));
+console.log(reverseString(""));
+console.log(reverseString("level"));
+console.log(reverseString("recursion"));
+console.log(reverseString("back"));
+console.log(reverseString("d"));
