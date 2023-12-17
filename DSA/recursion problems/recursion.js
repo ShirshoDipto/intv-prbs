@@ -36,10 +36,29 @@ function reverseString(str, tabs = "  ") {
 // console.log(reverseString("d"));
 
 /** ------------------------- Reverse String (Options 2) -------------------- */
-function reverseString(str, tabs = "  ") {
-  // console.log(`${tabs}reverseString(${str})`);
-  if (str.length === 0) return str;
-  const firstStr = str[0];
-  const newStr = str.slice(1, str.length);
-  return reverseString(newStr, tabs + "  ") + firstStr;
+// function reverseString(str, tabs = "  ") {
+//   // console.log(`${tabs}reverseString(${str})`);
+//   if (str.length === 0) return str;
+//   const firstStr = str[0];
+//   const newStr = str.slice(1, str.length);
+//   return reverseString(newStr, tabs + "  ") + firstStr;
+// }
+
+//------------------------ #3 Palindrome ---------------------
+function isPalindrome(str, tabs = "  ") {
+  console.log(`${tabs}isPalindrome(${str})`);
+  if (str.length === 0) return true;
+  if (str[0] !== str[str.length - 1]) return false;
+  const newStr = str.slice(1, str.length - 1);
+  return isPalindrome(newStr, tabs + "  ");
 }
+
+console.log(isPalindrome("level")); // true
+console.log(isPalindrome("racecar")); // true
+console.log(isPalindrome("baab")); // true
+console.log(isPalindrome("step on no pets")); // true
+console.log(isPalindrome("high")); // false
+console.log(isPalindrome("hi")); // false
+console.log(isPalindrome("palindrome")); // false
+console.log(isPalindrome("x")); // true
+console.log(isPalindrome("")); // true
