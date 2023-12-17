@@ -28,9 +28,18 @@ function reverseString(str, tabs = "  ") {
   return lastStr + reverseString(newStr, tabs + "  ");
 }
 
-console.log(reverseString("stressed"));
-console.log(reverseString(""));
-console.log(reverseString("level"));
-console.log(reverseString("recursion"));
-console.log(reverseString("back"));
-console.log(reverseString("d"));
+// console.log(reverseString("stressed"));
+// console.log(reverseString(""));
+// console.log(reverseString("level"));
+// console.log(reverseString("recursion"));
+// console.log(reverseString("back"));
+// console.log(reverseString("d"));
+
+/** ------------------------- Reverse String (Options 2) -------------------- */
+function reverseString(str, tabs = "  ") {
+  // console.log(`${tabs}reverseString(${str})`);
+  if (str.length === 0) return str;
+  const firstStr = str[0];
+  const newStr = str.slice(1, str.length);
+  return reverseString(newStr, tabs + "  ") + firstStr;
+}
