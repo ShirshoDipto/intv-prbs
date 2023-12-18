@@ -61,9 +61,9 @@ function coinToss(n) {
 }
 
 // console.log(coinToss(4));
-console.log(coinToss(3));
-console.log(coinToss(2));
-console.log(coinToss(1));
+// console.log(coinToss(3));
+// console.log(coinToss(2));
+// console.log(coinToss(1));
 
 // ------------------ #4 Combinations from a set of people --------------------
 function combinationHelper(remaining, soFar, allCombs, tabs = "   ") {
@@ -87,4 +87,7 @@ function combination(aSet) {
   return allCombs;
 }
 
+console.log(combination([]));
+console.log(combination(["Nick", "Kyle"]));
 console.log(combination(["Nick", "Kyle", "Trip"]));
+console.log(combination(["Nick", "Kyle", "Trip", "Shirsho"]));
