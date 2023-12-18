@@ -64,3 +64,27 @@ function coinToss(n) {
 console.log(coinToss(3));
 console.log(coinToss(2));
 console.log(coinToss(1));
+
+// ------------------ #4 Combinations from a set of people --------------------
+function combinationHelper(remaining, soFar, allCombs, tabs = "   ") {
+  // console.log(`${tabs}combinationHelper(${remaining} ${Array.from(soFar)})`);
+  if (remaining.length === 0) {
+    allCombs.push(soFar);
+  } else {
+    const newRemaining = [...remaining];
+    const next = newRemaining.pop();
+    combinationHelper(newRemaining, soFar, allCombs, tabs + "   ");
+    const newSoFar = new Set(Array.from(soFar));
+    newSoFar.add(next);
+    console.log(newSoFar);
+    combinationHelper(newRemaining, newSoFar, allCombs, tabs + "   ");
+  }
+}
+
+function combination(aSet) {
+  const allCombs = [];
+  combinationHelper(aSet, new Set(), allCombs);
+  return allCombs;
+}
+
+console.log(combination(["Nick", "Kyle", "Trip"]));
