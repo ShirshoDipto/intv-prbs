@@ -69,15 +69,14 @@ function coinToss(n) {
 function combinationHelper(remaining, soFar, allCombs, tabs = "   ") {
   // console.log(`${tabs}combinationHelper(${remaining} ${Array.from(soFar)})`);
   if (remaining.length === 0) {
-    allCombs.push(soFar);
+    allCombs.push(new Set(Array.from(soFar)));
   } else {
-    const newRemaining = [...remaining];
-    const next = newRemaining.pop();
-    combinationHelper(newRemaining, soFar, allCombs, tabs + "   ");
-    const newSoFar = new Set(Array.from(soFar));
-    newSoFar.add(next);
-    console.log(newSoFar);
-    combinationHelper(newRemaining, newSoFar, allCombs, tabs + "   ");
+    const next = remaining.pop();
+    combinationHelper(remaining, soFar, allCombs, tabs + "   ");
+    soFar.add(next);
+    combinationHelper(remaining, soFar, allCombs, tabs + "   ");
+    remaining.push(next);
+    soFar.delete(next);
   }
 }
 
