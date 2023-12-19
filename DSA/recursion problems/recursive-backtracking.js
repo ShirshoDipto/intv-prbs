@@ -189,3 +189,14 @@ function isValidNum(cell, num, board) {
   }
   return true;
 }
+
+function getAllOptions(cell, board) {
+  const options = [];
+  for (let i = 1; i < 10; i++) {
+    if (isValidNum(cell, `${i}`, board)) {
+      options.push(`${i}`);
+    }
+  }
+
+  return options;
+}
