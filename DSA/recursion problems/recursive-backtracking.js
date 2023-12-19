@@ -176,3 +176,16 @@ function getSubboxFilledOptions(cell, board, num) {
   }
   return true;
 }
+
+function isValidNum(cell, num, board) {
+  for (let i = 0; i < 9; i++) {
+    if (
+      board[cell.row][i] === num ||
+      board[i][cell.col] === num ||
+      !getSubboxFilledOptions(cell, board, num)
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
