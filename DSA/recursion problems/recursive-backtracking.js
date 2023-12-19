@@ -220,17 +220,28 @@ function getEmptyCells(board) {
   return emptyCells;
 }
 
-const board = [
-  ["5", "3", ".", ".", "7", ".", ".", ".", "."],
-  ["6", ".", ".", "1", "9", "5", ".", ".", "."],
-  [".", "9", "8", ".", ".", ".", ".", "6", "."],
-  ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
-  ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
-  ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-  [".", "6", ".", ".", ".", ".", "2", "8", "."],
-  [".", ".", ".", "4", "1", "9", ".", ".", "5"],
-  [".", ".", ".", ".", "8", ".", ".", "7", "9"],
-];
+function solveHelper(remaining, board) {
+  if (remaining.length === 0) {
+    return true;
+  }
 
-solveSudoku(board);
-console.log(board);
+  const cell = remaining.pop();
+  for (let i = 0; i < cell.options.length; i++) {
+    if (isValidNum(cell, `${cell.options[i]}`, board)) {
+      board[cell.row][cell.col] = `${cell.options[i]}`;
+      if (!solveHelper(remaining, board)) {
+        board[cell.row][cell.col] = ".";
+      } else {
+        return true;
+      }
+    }
+  }
+
+  remaining.push(cell);
+  return false;
+}
+
+var solveSudoku = function (board) {
+  const emptyCells = getEmptyCells(board);
+  solveHelper(emptyCells, board);
+};
