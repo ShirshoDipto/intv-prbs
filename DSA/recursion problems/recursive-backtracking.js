@@ -119,4 +119,42 @@ var binaryTreePaths = function (root) {
 };
 
 const root = [1, 2, 3, null, 5];
-console.log(binaryTreePaths(root));
+// console.log(binaryTreePaths(root));
+
+// --------------------- # Letter Combination of a phone number ---------------------
+
+function letterCombinationsHelper(remaining, soFar, allCombs, keymaps) {
+  if (remaining.length === 0) {
+    return allCombs.push(soFar);
+  }
+
+  const next = remaining[0];
+  const chars = keymaps[next];
+  for (let i = 0; i < chars.length; i++) {
+    const aChar = chars[i];
+    letterCombinationsHelper(
+      remaining.slice(1),
+      soFar + aChar,
+      allCombs,
+      keymaps
+    );
+  }
+}
+
+var letterCombinations = function (digits) {
+  if (digits.length === 0) return [];
+  const keymaps = {
+    2: ["a", "b", "c"],
+    3: ["d", "e", "f"],
+    4: ["g", "h", "i"],
+    5: ["j", "k", "l"],
+    6: ["m", "n", "o"],
+    7: ["p", "q", "r", "s"],
+    8: ["t", "u", "v"],
+    9: ["w", "x", "y", "z"],
+  };
+
+  const allCombs = [];
+  letterCombinationsHelper(digits, "", allCombs, keymaps);
+  return allCombs;
+};
