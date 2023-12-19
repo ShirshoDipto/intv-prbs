@@ -19,18 +19,18 @@ function fibonacci(n, tabs = "  ") {
 // console.log(fibonacci(5));
 
 // --------------------- #2 Permutation ----------------------
-// function permutationHelper(remaining, soFar, allPerms, tabs = "  ") {
-//   // console.log(`${tabs}permutationsHelper(${remaining}, ${soFar})`);
-//   if (remaining === "") {
-//     allPerms.add(soFar);
-//   } else {
-//     for (let i = 0; i < remaining.length; i++) {
-//       const nextChar = remaining[i];
-//       const newRemaining = remaining.slice(0, i) + remaining.slice(i + 1);
-//       permutationHelper(newRemaining, soFar + nextChar, allPerms, tabs + "  ");
-//     }
-//   }
-// }
+function permutationHelper(remaining, soFar, allPerms, tabs = "  ") {
+  // console.log(`${tabs}permutationsHelper(${remaining}, ${soFar})`);
+  if (remaining === "") {
+    allPerms.add(soFar);
+  } else {
+    for (let i = 0; i < remaining.length; i++) {
+      const nextChar = remaining[i];
+      const newRemaining = remaining.slice(0, i) + remaining.slice(i + 1);
+      permutationHelper(newRemaining, soFar + nextChar, allPerms, tabs + "  ");
+    }
+  }
+}
 
 function permutation(str) {
   const allPermutaations = new Set();
@@ -86,7 +86,37 @@ function combination(aSet) {
   return allCombs;
 }
 
-console.log(combination([]));
-console.log(combination(["Nick", "Kyle"]));
-console.log(combination(["Nick", "Kyle", "Trip"]));
-console.log(combination(["Nick", "Kyle", "Trip", "Shirsho"]));
+// console.log(combination([]));
+// console.log(combination(["Nick", "Kyle"]));
+// console.log(combination(["Nick", "Kyle", "Trip"]));
+// console.log(combination(["Nick", "Kyle", "Trip", "Shirsho"]));
+
+// -------------------- #5 Binary Tree Path -------------------
+
+function helper(root, index, soFar, allPaths, tabs = "   ") {
+  // console.log(`${tabs}tree(${index}, ${soFar})`);
+  if (!root[index]) {
+    return false;
+  } else {
+    const path = soFar === "" ? `${root[index]}` : soFar + `->${root[index]}`;
+    const path1 = helper(root, 2 * index + 1, path, allPaths);
+    const path2 = helper(root, 2 * index + 2, path, allPaths);
+    if (!path1 && !path2) {
+      allPaths.push(path);
+    }
+    return true;
+  }
+}
+
+/**
+ * @param {TreeNode} root
+ * @return {string[]}
+ */
+var binaryTreePaths = function (root) {
+  const allPaths = [];
+  helper(root, 0, "", allPaths);
+  return allPaths;
+};
+
+const root = [1, 2, 3, null, 5];
+console.log(binaryTreePaths(root));
