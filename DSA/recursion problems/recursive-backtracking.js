@@ -200,3 +200,37 @@ function getAllOptions(cell, board) {
 
   return options;
 }
+
+function getEmptyCells(board) {
+  const emptyCells = [];
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      if (board[i][j] === ".") {
+        const cell = {
+          row: i,
+          col: j,
+        };
+        const options = getAllOptions(cell, board);
+        cell.options = options;
+        emptyCells.push(cell);
+      }
+    }
+  }
+
+  return emptyCells;
+}
+
+const board = [
+  ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+  ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+  [".", "9", "8", ".", ".", ".", ".", "6", "."],
+  ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+  ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+  ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+  [".", "6", ".", ".", ".", ".", "2", "8", "."],
+  [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+  [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+];
+
+solveSudoku(board);
+console.log(board);
