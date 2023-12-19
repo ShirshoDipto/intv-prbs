@@ -121,7 +121,7 @@ var binaryTreePaths = function (root) {
 const root = [1, 2, 3, null, 5];
 // console.log(binaryTreePaths(root));
 
-// --------------------- # Letter Combination of a phone number ---------------------
+// --------------------- #6 Letter Combination of a phone number ---------------------
 
 function letterCombinationsHelper(remaining, soFar, allCombs, keymaps) {
   if (remaining.length === 0) {
@@ -158,3 +158,21 @@ var letterCombinations = function (digits) {
   letterCombinationsHelper(digits, "", allCombs, keymaps);
   return allCombs;
 };
+
+// ------------------- #7 Sudoko Solver ----------------------
+
+function getSubboxFilledOptions(cell, board, num) {
+  const rowLowerLimit = Math.floor(cell.row / 3) * 3;
+  const rowUpperLimit = rowLowerLimit + 2;
+  const colLowerLimit = Math.floor(cell.col / 3) * 3;
+  const colUpperLimit = colLowerLimit + 2;
+  for (let i = rowLowerLimit; i < rowUpperLimit + 1; i++) {
+    for (let j = colLowerLimit; j < colUpperLimit + 1; j++) {
+      const boardCell = board[i][j];
+      if (i !== cell.row && j !== cell.col && boardCell === num) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
